@@ -1,5 +1,4 @@
 import { Navbar, Nav, Container } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
 const MyNavbar = () => {
   return (
     <Navbar bg="dark" variant="dark" expand="lg" className="sticky-top">

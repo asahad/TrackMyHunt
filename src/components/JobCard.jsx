@@ -1,13 +1,31 @@
 // JobCard.jsx
+import { Card } from 'react-bootstrap';
+import { useDrag } from 'react-dnd';
+import { ItemTypes } from './Constants';
 
-function JobCard({ job }) {
+const JobCard=({ job })=> {
+  const [{ opacity }, dragRef] = useDrag(
+    () => ({
+      type: ItemTypes.CARD,
+      item: { job },
+      collect: (monitor) => ({
+        opacity: monitor.isDragging() ? 0.5 : 1
+      })
+    }),
+    [job]
+  );
   return (
-    <div className="job-card">
-      <h3>{job.company}</h3>
-      <p>{job.position}</p>
-      <p>{job.daysAgo} days ago</p>
-    </div>
+    <Card 
+      ref={dragRef} 
+      style={{ opacity }}
+      className="job-card mb-3"
+    >
+      <Card.Body>
+        <Card.Title>{job.company}</Card.Title>
+        <Card.Text>{job.position}</Card.Text>
+        <Card.Text>{job.daysAgo} days ago</Card.Text>
+      </Card.Body>
+    </Card>
   );
 }
-
 export default JobCard;
