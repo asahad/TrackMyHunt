@@ -1,3 +1,5 @@
+//------------------------Navbar Component---------------------------------------------------
+// Navbar component derived from the react-bootstrap 
 import { Navbar, Nav, Container } from "react-bootstrap";
 const MyNavbar = () => {
   return (

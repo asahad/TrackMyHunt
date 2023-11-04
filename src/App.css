@@ -66,22 +66,22 @@
 }
 
 /* Additional styles for different job-card colors based on the status */
-.wishlist-card {
+.wishlist {
   background-color: #e1f5fe;
 }
 
-.applied-card {
+.applied {
   background-color: #e8f5e9;
 }
 
-.interviewed-card {
+.interviewed {
   background-color: #fff9c4;
 }
 
-.accepted-card {
+.accepted {
   background-color: #e8eaf6;
 }
 
-.rejected-card {
+.rejected {
   background-color: #ffebee;
 }

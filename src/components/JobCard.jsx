@@ -4,7 +4,8 @@ import { useDrag } from "react-dnd";
 import { ItemTypes } from "./Constants";
 import { BiTrash } from "react-icons/bi";
 
-const JobCard = ({ job }) => {
+const JobCard = ({ job, status }) => {
+  console.log(status);
   const [{ opacity }, dragRef] = useDrag(
     () => ({
       type: ItemTypes.CARD,
@@ -17,7 +18,7 @@ const JobCard = ({ job }) => {
   );
   return (
     <>
-      <Card ref={dragRef} style={{ opacity }} className="job-card mb-3">
+      <Card ref={dragRef} style={{ opacity }} className={`status`}>
         <Card.Body>
           <Row>
             <Col xs={6}>

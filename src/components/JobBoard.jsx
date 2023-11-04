@@ -12,6 +12,11 @@ const JobBoard = () => {
       { company: "Company B", position: "Designer", daysAgo: 5 },
       { company: "Company B", position: "Designer", daysAgo: 5 },
     ],
+    Applied: [
+      { company: "Company B", position: "Designer", daysAgo: 5 },
+      { company: "Company B", position: "Designer", daysAgo: 5 },
+      { company: "Company B", position: "Designer", daysAgo: 5 },
+    ],
     // ... other jobs
 
     interviewed: [
@@ -56,7 +61,7 @@ const JobBoard = () => {
           ➕
         </Button>
         {jobData[status].map((job, index) => (
-          <JobCard key={index} job={job} />
+          <JobCard key={index} job={job} status={status} />
         ))}
       </div>
     );
