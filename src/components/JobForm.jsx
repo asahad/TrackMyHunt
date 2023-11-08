@@ -1,6 +1,7 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { Button } from "react-bootstrap";
 
 // Schema for form validation
 const validationSchema = Yup.object().shape({
@@ -63,9 +64,9 @@ const JobForm = () => (
             />
           </div>
 
-          <button type="submit" disabled={isSubmitting}>
-            Submit
-          </button>
+          <Button type="submit" disabled={isSubmitting}>
+            Save Job
+          </Button>
         </Form>
       )}
     </Formik>

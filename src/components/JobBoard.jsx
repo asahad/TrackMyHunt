@@ -73,7 +73,7 @@ const JobBoard = () => {
             <div className="form-container">
               <JobForm />
               <Button variant="secondary" onClick={() => setDisplayForm(false)}>
-                Close
+                Discard
               </Button>
             </div>
           </div>
