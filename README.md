@@ -1,8 +1,1 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+#TrackMyHunt is a job application tracker that can be used for easily organizing of jobs.Job application can be daunting process and usually keeping trak of which jobs one has applied can be difficult. This sometimes leads to miss opportunities or mistakes. In a attempt to solve this problem, I came out with TrackMyHUnt.
