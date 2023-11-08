@@ -3,6 +3,7 @@ import JobCard from "./JobCard";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useDrop } from "react-dnd";
 import { ItemTypes } from "./Constants";
+import JobForm from "./JobForm";
 
 const JobBoard = () => {
   // Sample data
@@ -54,19 +55,35 @@ const JobBoard = () => {
       drop: (item) => handleDropJob(status, item.job),
     });
 
+    const [displayForm, setDisplayForm] = useState(false);
+
     return (
       <div ref={dropRef}>
         <h2>{status.charAt(0).toUpperCase() + status.slice(1)}</h2>
-        <Button variant="primary" size="lg" className="job-add-button">
+        <Button
+          variant="primary"
+          size="lg"
+          className="job-add-button"
+          onClick={() => setDisplayForm(true)}
+        >
           ➕
         </Button>
+        {displayForm && (
+          <div className="form-backdrop">
+            <div className="form-container">
+              <JobForm />
+              <Button variant="secondary" onClick={() => setDisplayForm(false)}>
+                Close
+              </Button>
+            </div>
+          </div>
+        )}
         {jobData[status].map((job, index) => (
           <JobCard key={index} job={job} status={status} />
         ))}
       </div>
     );
   };
-
   return (
     <>
       <Container fluid className="job-board">
