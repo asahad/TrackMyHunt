@@ -7,26 +7,26 @@ const MyNavbar = () => {
       <Container>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav style={{ marginLeft: "auto" }}>
+          <Nav className="me-auto">
             <LinkContainer to="/">
-              <Nav.Link>
-                <h4>Job Board</h4>
-              </Nav.Link>
+              <Nav.Link>Job Board</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/metrics">
-              <Nav.Link>
-                <h4 className="ml-5">Metrics</h4>
-              </Nav.Link>
+              <Nav.Link>Metrics</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/map">
-              <Nav.Link>
-                <h4>Map</h4>
-              </Nav.Link>
+              <Nav.Link>Map</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/contacts">
-              <Nav.Link>
-                <h4>Contacts</h4>
-              </Nav.Link>
+              <Nav.Link>Contacts</Nav.Link>
+            </LinkContainer>
+          </Nav>
+          <Nav>
+            <LinkContainer to="/login">
+              <Nav.Link>Login</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/signup">
+              <Nav.Link>Sign Up</Nav.Link>
             </LinkContainer>
           </Nav>
         </Navbar.Collapse>

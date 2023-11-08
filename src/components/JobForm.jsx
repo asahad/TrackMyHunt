@@ -55,10 +55,10 @@ const JobForm = () => (
           </div>
 
           <div>
-            <label htmlFor="remark">Remark</label>
+            <label htmlFor="Description">Description</label>
             <Field type="text" name="remark" as="textarea" />
             <ErrorMessage
-              name="remark"
+              name="description"
               component="div"
               className="error-message"
             />

@@ -1,38 +1,53 @@
-
-
-/* .job-board {
-  gap: 1rem;
-  max-width: 100%;
-  overflow-x: auto;
-} */
-
-.app-container {
-  padding: 2rem;
-}
-
-.app-container h2 {
-  border-bottom: 2px solid #ddd;
-  padding-bottom: 10px;
-  margin-bottom: 1rem;
-}
-
-/* Style for the job card */
+/* ------------------Job Card Styles---------------------------------------------------------- */
 .job-card {
   width: 100%;
-  min-height: 30px; /* Adjust to your preference */
+  height: 20px;
   border: 1px solid #ddd;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 1rem;
+  min-height: 100px;
+  max-height: 150px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 }
 
 .job-card .card-body {
   padding: 0.5rem;
+  background-color: white;
+}
+
+/* Define default style for all job card bodies */
+.job-card .card-body {
+  padding: 0.5rem;
+  background-color: aqua;
+}
+
+/* Specific styles for each job card category */
+.wishlist .card-body {
+  background-color: #e1f5fe;
+}
+
+.applied .card-body {
+  background-color: #e8f5e9;
+}
+
+.interviewed .card-body {
+  background-color: #fff9c4;
+}
+
+.accepted .card-body {
+  background-color: #e8eaf6;
+}
+
+.rejected .card-body {
+  background-color: #ffebee;
 }
 
 .job-card .card-title {
   margin: 0;
   font-size: 1.2rem;
-  color: #333;
+  color: black;
 }
 
 .job-card .card-text {
@@ -43,7 +58,7 @@
 
 .job-add-button {
   width: 100%;
-  padding: 10px;
+  padding: 20px;
   box-sizing: border-box;
   margin-bottom: 1rem;
   border: none;
@@ -65,27 +80,6 @@
   }
 }
 
-/* Additional styles for different job-card colors based on the status */
-.wishlist {
-  background-color: #e1f5fe;
-}
-
-.applied {
-  background-color: #e8f5e9;
-}
-
-.interviewed {
-  background-color: #fff9c4;
-}
-
-.accepted {
-  background-color: #e8eaf6;
-}
-
-.rejected {
-  background-color: #ffebee;
-}
-
 /* Add this to your CSS file */
 .form-container {
   max-width: 500px;
@@ -93,7 +87,7 @@
   padding: 2rem;
   background-color: #f7f7f7;
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
@@ -148,18 +142,17 @@ button:disabled {
   font-size: 0.875rem;
 }
 
-
 .form-backdrop {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed; /* Position it relative to the viewport */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Add a semi-transparent backdrop */
-  z-index: 1050; /* Make sure it sits on top of other content */
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1050;
 }
 
 .form-container {
@@ -168,3 +161,54 @@ button:disabled {
   border-radius: 5px;
   z-index: 2;
 }
+
+/* -----------------------------------------------------Signup and Login Forms Styles---------------------------------------------------- */
+.form-container {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h4 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.form-container label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.form-container .error-message {
+  color: #d00;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.form-container .field {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.form-container button {
+  width: 100%;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #0056b3;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.form-container button:disabled {
+  background-color: #cccccc;
+}
+
+/* Add more styles as per your requirement */

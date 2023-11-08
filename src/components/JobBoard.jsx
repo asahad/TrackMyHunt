@@ -59,7 +59,9 @@ const JobBoard = () => {
 
     return (
       <div ref={dropRef}>
-        <h2>{status.charAt(0).toUpperCase() + status.slice(1)}</h2>
+        <h5 style={{ textAlign: "center" }}>
+          {status.charAt(0).toUpperCase() + status.slice(1)}
+        </h5>
         <Button
           variant="primary"
           size="lg"
