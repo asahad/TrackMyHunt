@@ -1,103 +1,112 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import JobCard from "./JobCard";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import { useDrop } from "react-dnd";
-import { ItemTypes } from "./Constants";
+import { DndProvider, useDrop } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import JobForm from "./JobForm";
 
 const JobBoard = () => {
-  // Sample data
   const [jobData, setJobData] = useState({
-    wishlist: [
-      { company: "Company B", position: "Designer", daysAgo: 5 },
-      { company: "Company B", position: "Designer", daysAgo: 5 },
-      { company: "Company B", position: "Designer", daysAgo: 5 },
-    ],
-    Applied: [
-      { company: "Company B", position: "Designer", daysAgo: 5 },
-      { company: "Company B", position: "Designer", daysAgo: 5 },
-      { company: "Company B", position: "Designer", daysAgo: 5 },
-    ],
-    // ... other jobs
-
-    interviewed: [
-      { company: "Company B", position: "Designer", daysAgo: 5 },
-      { company: "Company B", position: "Designer", daysAgo: 5 },
-      { company: "Company B", position: "Designer", daysAgo: 5 },
-      // ... other jobs
-    ],
-    accepted: [
-      { company: "Company B", position: "Designer", daysAgo: 5 },
-      { company: "Company B", position: "Designer", daysAgo: 5 },
-      { company: "Company B", position: "Designer", daysAgo: 5 },
-    ],
-    rejected: [
-      { company: "Company B", position: "Designer", daysAgo: 5 },
-      { company: "Company B", position: "Designer", daysAgo: 5 },
-      { company: "Company B", position: "Designer", daysAgo: 5 },
-      // ... other jobs
-    ],
+    wishlist: [],
+    applied: [],
+    interviewed: [],
+    accepted: [],
+    rejected: [],
   });
 
-  const handleDropJob = (status, droppedJob) => {
-    // Basic logic to handle moving the job to the new category.
-    const updatedData = { ...jobData };
-    Object.keys(updatedData).forEach((key) => {
-      updatedData[key] = updatedData[key].filter((job) => job !== droppedJob);
+  const [showForm, setShowForm] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
+  useEffect(() => {
+    const storedJobs = localStorage.getItem("jobData");
+    if (storedJobs) {
+      setJobData(JSON.parse(storedJobs));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("jobData", JSON.stringify(jobData));
+  }, [jobData]);
+
+  const moveJob = (job, sourceCategory, targetCategory) => {
+    setJobData((prevData) => {
+      const sourceJobs = prevData[sourceCategory].filter((j) => j !== job);
+      const targetJobs = [job, ...prevData[targetCategory]];
+      return {
+        ...prevData,
+        [sourceCategory]: sourceJobs,
+        [targetCategory]: targetJobs,
+      };
     });
-    updatedData[status].push(droppedJob);
-    setJobData(updatedData);
   };
 
-  const JobCategory = ({ status }) => {
-    const [, dropRef] = useDrop({
-      accept: ItemTypes.CARD,
-      drop: (item) => handleDropJob(status, item.job),
+  const addJob = (newJob) => {
+    if (selectedCategory) {
+        setJobData(prevData => ({
+            ...prevData,
+            [selectedCategory]: [...prevData[selectedCategory], newJob]
+        }));
+        setShowForm(false);
+    }
+};
+  const deleteJob = (category, jobToDelete) => {
+    setJobData((prevData) => ({
+      ...prevData,
+      [category]: prevData[category].filter((job) => job !== jobToDelete),
+    }));
+  };
+
+  const JobCategory = ({ category }) => {
+    const [, drop] = useDrop({
+      accept: "JOB_CARD",
+      drop: (item) => moveJob(item.job, item.status, category),
     });
 
-    const [displayForm, setDisplayForm] = useState(false);
-
     return (
-      <div ref={dropRef}>
+      <div ref={drop} className="job-category">
         <h5 style={{ textAlign: "center" }}>
-          {status.charAt(0).toUpperCase() + status.slice(1)}
+          {category.charAt(0).toUpperCase() + category.slice(1)}
         </h5>
         <Button
           variant="primary"
-          size="lg"
+          onClick={() => {
+            setShowForm(true);
+            setSelectedCategory(category);
+          }}
           className="job-add-button"
-          onClick={() => setDisplayForm(true)}
         >
           ➕
         </Button>
-        {displayForm && (
-          <div className="form-backdrop">
-            <div className="form-container">
-              <JobForm />
-              <Button variant="secondary" onClick={() => setDisplayForm(false)}>
-                Discard
-              </Button>
-            </div>
-          </div>
-        )}
-        {jobData[status].map((job, index) => (
-          <JobCard key={index} job={job} status={status} />
+        {jobData[category].map((job, index) => (
+          <JobCard
+            key={index}
+            job={job}
+            status={category}
+            onDelete={() => deleteJob(category, job)}
+          />
         ))}
       </div>
     );
   };
+
   return (
-    <>
+    <DndProvider backend={HTML5Backend}>
+      {showForm && (
+        <div className="form-modal">
+          <JobForm onSave={addJob} onDiscard={() => setShowForm(false)} />
+        </div>
+      )}
       <Container fluid className="job-board">
         <Row>
-          {Object.keys(jobData).map((status) => (
-            <Col key={status} lg="2" md="4" sm="6" xs="12" className={status}>
-              <JobCategory status={status} />
+          {Object.keys(jobData).map((category) => (
+            <Col key={category} lg={2} md={4} sm={6} xs={12}>
+              <JobCategory category={category} />
             </Col>
           ))}
         </Row>
       </Container>
-    </>
+    </DndProvider>
   );
 };
+
 export default JobBoard;

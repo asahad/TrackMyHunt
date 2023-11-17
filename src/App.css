@@ -56,6 +56,31 @@
   color: #555;
 }
 
+.job-card .delete-icon {
+  visibility: hidden;
+}
+
+.job-card:hover .delete-icon {
+  visibility: visible;
+}
+
+.form-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.job-board {
+  position: relative;
+  z-index: 1;
+}
+
 .job-add-button {
   width: 100%;
   padding: 20px;
@@ -63,6 +88,11 @@
   margin-bottom: 1rem;
   border: none;
   cursor: pointer;
+}
+
+.job-add-button {
+  width: 100%; /* Makes the button full width */
+  display: block; /* Ensures the button is a block-level element */
 }
 
 /* Responsive behavior */
@@ -210,5 +240,7 @@ button:disabled {
 .form-container button:disabled {
   background-color: #cccccc;
 }
-
-/* Add more styles as per your requirement */
+/* In your CSS file */
+.button-spacing {
+  margin-top: 10px;
+}

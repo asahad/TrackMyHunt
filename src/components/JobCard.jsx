@@ -1,43 +1,33 @@
-// JobCard.jsx
-import { Button, Card, Row, Col } from "react-bootstrap";
+import React from "react";
+import { Card, Row, Col } from "react-bootstrap";
 import { useDrag } from "react-dnd";
-import { ItemTypes } from "./Constants";
 import { BiTrash } from "react-icons/bi";
 
-const JobCard = ({ job, status }) => {
-  const [{ opacity }, dragRef] = useDrag(
-    () => ({
-      type: ItemTypes.CARD,
-      item: { job },
-      collect: (monitor) => ({
-        opacity: monitor.isDragging() ? 0.5 : 1,
-      }),
+const JobCard = ({ job, status, onDelete }) => {
+  const [, drag] = useDrag({
+    type: "JOB_CARD",
+    item: { job, status },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
     }),
-    [job]
-  );
+  });
+
   return (
-    <>
-      <Card ref={dragRef} style={{ opacity }} className={`status job-card`}>
-        <Card.Body>
-          <Row>
-            <Col xs={6}>
-              <Card.Title>{job.company}</Card.Title>
-              <Card.Text>{job.position}</Card.Text>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={6}>
-              <Card.Text>{job.daysAgo} days ago</Card.Text>
-            </Col>
-            <Col xs={6}>
-              <Card.Text>
-                <BiTrash />
-              </Card.Text>
-            </Col>
-          </Row>
-        </Card.Body>
-      </Card>
-    </>
+    <Card ref={drag} className="job-card">
+      <Card.Body>
+        <Row>
+          <Col xs={10}>
+            <Card.Title>{job.company}</Card.Title>
+            <Card.Text>{job.position}</Card.Text>
+            <Card.Text>{job.daysAgo} days ago</Card.Text>
+          </Col>
+          <Col xs={2} className="text-right delete-icon">
+            <BiTrash onClick={() => onDelete(status, job)} />
+          </Col>
+        </Row>
+      </Card.Body>
+    </Card>
   );
 };
+
 export default JobCard;
