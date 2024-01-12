@@ -10,6 +10,7 @@ import Map from "./pages/Map";
 import Metric from "./pages/Metrics";
 import LoginForm from "./components/LoginForm";
 import SignUpForm from "./components/SignUpForm"
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -25,7 +26,9 @@ function App() {
           <Route path="/signup" element={<SignUpForm />} />
         </Routes>
       </DndProvider>
+      {/* <Footer/> */}
     </BrowserRouter>
+
   );
 }
 
