@@ -49,5 +49,5 @@ categories
 - Preview the build
 
 # Visual Example
-![Screen Shot](https://user-images.githubusercontent.com/48189579/211897102-3368957d-bcba-4815-b121-ac2d85080c49.png)
+![Screen Shot](/public/trackmyhunt.png)
 
